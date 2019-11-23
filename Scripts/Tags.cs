@@ -8,6 +8,11 @@ public class Axis {
     public const string HORIZONTAL_AXIS = "Horizontal";
 }
 
+public class Tags
+{
+    public const string PLAYER_TAG = "Player";
+}
+
 public class AnimationTags
 {
     public const string WALK_PARAMETER = "walk";
