@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class AttackDamage : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public LayerMask layer;
+    public float radius = 1f;
+    public float damage = 20f;
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius, layer);
+
+        if(hits.Length > 0)
+        {
+            print("chal gaya oye");
+
+            hits[0].GetComponent<HealthScript>().ApplyDamage(20f);
+            gameObject.SetActive(false);
+        }
 	}
 }

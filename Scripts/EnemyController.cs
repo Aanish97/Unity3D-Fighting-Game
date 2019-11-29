@@ -11,12 +11,14 @@ public enum EnemyState
 
 public class EnemyController : MonoBehaviour {
 
+    public GameObject attack_point;
+
     private CharacterAnimations enem_Anim;
     private NavMeshAgent navAgent;
 
     private Transform playerTarget;
     public float move_speed = 50f;
-    public float attack_distance = 5f;
+    public float attack_distance = 50f;
     public float chase_after_Attack_distance = 1f;
     private float wait_before_attack_time = 1f;
     private float attack_timer;
@@ -62,7 +64,8 @@ public class EnemyController : MonoBehaviour {
         {
             enem_Anim.Walk(true);
         }
-        print(Vector3.Distance(transform.position, playerTarget.transform.position) + "    " + attack_distance);
+        attack_distance = 35f;
+       // print(Vector3.Distance(transform.position, playerTarget.transform.position) + "  helooo beasns  " + attack_distance);
         if (Vector3.Distance(transform.position, playerTarget.transform.position) <= attack_distance)
         {
             enemy_state = EnemyState.ATTACK;
@@ -79,7 +82,7 @@ public class EnemyController : MonoBehaviour {
         print(attack_timer + "   " + wait_before_attack_time);
         if (attack_timer > wait_before_attack_time)
         {
-            print("YAHAN ata hi nai");
+            //print("YAHAN ata hi nai");
             if (Random.Range(0,2) > 0)
             {
                 enem_Anim.Attack_0();
@@ -94,6 +97,19 @@ public class EnemyController : MonoBehaviour {
         {
             navAgent.isStopped = false;
             enemy_state = EnemyState.CHASE;
+        }
+    }
+
+    void Activate_attack_point()
+    {
+        attack_point.SetActive(true);
+    }
+
+    void DeActivate_attack_point()
+    {
+        if (attack_point.activeInHierarchy)
+        {
+            attack_point.SetActive(false);
         }
     }
 }

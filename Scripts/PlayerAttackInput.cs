@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttackInput : MonoBehaviour {
 
     private CharacterAnimations playerAnimation;
+    public GameObject attack_point;
 	// Use this for initialization
 	void Awake () {
         playerAnimation = GetComponent<CharacterAnimations>();
@@ -37,4 +38,17 @@ public class PlayerAttackInput : MonoBehaviour {
         }
 
 	}
+
+    void Activate_attack_point()
+    {
+        attack_point.SetActive(true);
+    }
+
+    void DeActivate_attack_point()
+    {
+        if (attack_point.activeInHierarchy)
+        {
+            attack_point.SetActive(false);
+        }
+    }
 }
