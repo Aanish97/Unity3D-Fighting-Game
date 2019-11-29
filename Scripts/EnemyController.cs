@@ -15,10 +15,10 @@ public class EnemyController : MonoBehaviour {
     private NavMeshAgent navAgent;
 
     private Transform playerTarget;
-    public float move_speed = 3.5f;
-    public float attack_distance = 1f;
+    public float move_speed = 50f;
+    public float attack_distance = 5f;
     public float chase_after_Attack_distance = 1f;
-    private float wait_before_attack_time = 3f;
+    private float wait_before_attack_time = 1f;
     private float attack_timer;
     private EnemyState enemy_state;
 
@@ -49,26 +49,51 @@ public class EnemyController : MonoBehaviour {
 
     void ChasePlayer()
     {
-        navAgent.SetDestination(playerTarget.position);
+//        navAgent.destination = playerTarget.transform.position * Time.deltaTime;
+        navAgent.SetDestination(playerTarget.transform.position);
         navAgent.speed = move_speed;
 
-        if(navAgent.velocity.sqrMagnitude == 0)
+        if(navAgent.velocity.sqrMagnitude == 0f)
         {
+       //     enemy_state = EnemyState.ATTACK;
             enem_Anim.Walk(false);
         }
         else
         {
             enem_Anim.Walk(true);
         }
-
-        if(Vector3.Distance(transform.position, playerTarget.position) <= attack_distance)
+        print(Vector3.Distance(transform.position, playerTarget.transform.position) + "    " + attack_distance);
+        if (Vector3.Distance(transform.position, playerTarget.transform.position) <= attack_distance)
         {
             enemy_state = EnemyState.ATTACK;
         }
     }
-
+    
     void AttackPlayer()
     {
+        navAgent.velocity = Vector3.zero;
+        navAgent.isStopped = true;
+        enem_Anim.Walk(false);
 
+        attack_timer = Time.deltaTime + 1;
+        print(attack_timer + "   " + wait_before_attack_time);
+        if (attack_timer > wait_before_attack_time)
+        {
+            print("YAHAN ata hi nai");
+            if (Random.Range(0,2) > 0)
+            {
+                enem_Anim.Attack_0();
+            }
+            else
+            {
+                enem_Anim.Attack_1();
+            }
+            attack_timer = 0f;
+        }
+        if(Vector3.Distance(transform.position, playerTarget.transform.position) > attack_distance + chase_after_Attack_distance)
+        {
+            navAgent.isStopped = false;
+            enemy_state = EnemyState.CHASE;
+        }
     }
 }

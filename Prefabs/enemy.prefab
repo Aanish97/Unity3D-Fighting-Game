@@ -1643,6 +1643,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c08318349c2a648bdd47ce23f8b9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move_speed: 3.5
+  attack_distance: 1
+  chase_after_Attack_distance: 1
 --- !u!137 &137229838137531200
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
