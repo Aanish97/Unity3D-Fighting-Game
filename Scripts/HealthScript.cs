@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthScript : MonoBehaviour {
 
@@ -44,16 +45,32 @@ public class HealthScript : MonoBehaviour {
             {
                 GetComponent<PlayerMove>().enabled = false;
                 GetComponent<PlayerAttackInput>().enabled = false;
+                //yield return new WaitForSeconds(5);
+                SceneManager.LoadScene(4);
             }
             else
             {
                 GetComponent<EnemyController>().enabled = false;
                 GetComponent<NavMeshAgent>().enabled = false;
+                //yield return new WaitForSeconds(5);
+                changeScene();
             }
-
         //    print("character died");
         }
     }
+
+    private void changeScene()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            SceneManager.LoadScene(5);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
 
     public void RotateDeath()
     {
