@@ -29,7 +29,7 @@ public class CharacterAnimations : MonoBehaviour {
         anim.SetTrigger(AnimationTags.ATTACK_PARAMETER_1);
     }
 
-    void FreezeAnimation()
+    public void FreezeAnimation()
     {
         anim.speed = 0f;
     }

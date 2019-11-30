@@ -6,35 +6,39 @@ public class PlayerAttackInput : MonoBehaviour {
 
     private CharacterAnimations playerAnimation;
     public GameObject attack_point;
+    public  PlayerSheild shield;
+
 	// Use this for initialization
 	void Awake () {
         playerAnimation = GetComponent<CharacterAnimations>();
+        shield = GetComponent<PlayerSheild>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.J))
         {
+//            playerAnimation.FreezeAnimation();
             playerAnimation.Defend(true);
+            shield.ActivateShield(true);
         }
 
         if(Input.GetKeyUp(KeyCode.J))
         {
             playerAnimation.UnFreezeAnimation();
             playerAnimation.Defend(false);
-
+            shield.ActivateShield(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            if(Random.Range(0,2)>0)
-            {
-                playerAnimation.Attack_0();
-            }
-            else
-            {
-                playerAnimation.Attack_1();
-            }
+            playerAnimation.Attack_0();
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+           
+            playerAnimation.Attack_1();
+            
         }
 
 	}
