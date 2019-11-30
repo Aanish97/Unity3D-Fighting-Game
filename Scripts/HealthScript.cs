@@ -46,7 +46,7 @@ public class HealthScript : MonoBehaviour {
                 GetComponent<PlayerMove>().enabled = false;
                 GetComponent<PlayerAttackInput>().enabled = false;
                 //yield return new WaitForSeconds(5);
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene(6);
             }
             else
             {
@@ -61,9 +61,9 @@ public class HealthScript : MonoBehaviour {
 
     private void changeScene()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 3)
+        if(SceneManager.GetActiveScene().buildIndex == 5)
         {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(7);
         }
         else
         {
